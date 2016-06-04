@@ -19,6 +19,7 @@
 #include "../../../lib-other/pjrc/usb_keyboard/usb_keyboard.h"
 
 void kbfun_layer_push_1_and_led_1_on(void) {
+  _kb_led_1_set_percent(MAKEFILE_LED_BRIGHTNESS/100);
   kbfun_layer_push_1();
   keyboard_leds |= 1;
 }
@@ -26,6 +27,7 @@ void kbfun_layer_push_1_and_led_1_on(void) {
 void kbfun_layer_push_1_and_move_led_1_to_2(void) {
   kbfun_layer_push_1();
   keyboard_leds &= 0xfe;
+  _kb_led_2_set_percent(MAKEFILE_LED_BRIGHTNESS/100);
   keyboard_leds |= 0x02;
 }
 
