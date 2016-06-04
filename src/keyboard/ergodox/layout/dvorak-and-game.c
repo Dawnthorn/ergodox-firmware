@@ -16,6 +16,28 @@
 #include "../matrix.h"
 #include "../layout.h"
 
+#include "../../../lib-other/pjrc/usb_keyboard/usb_keyboard.h"
+
+void kbfun_layer_push_1_and_led_1_on(void) {
+  kbfun_layer_push_1();
+  keyboard_leds |= 1;
+}
+
+void kbfun_layer_push_1_and_move_led_1_to_2(void) {
+  kbfun_layer_push_1();
+  keyboard_leds &= 0xfe;
+  keyboard_leds |= 0x02;
+}
+
+void kbfun_layer_pop_1_and_turn_off_led_1_and_2(void) {
+  kbfun_layer_pop_1();
+  keyboard_leds &= 0xfc;
+}
+
+#define push1led1 &kbfun_layer_push_1_and_led_1_on
+#define push1move12 &kbfun_layer_push_1_and_move_led_1_to_2
+#define pop1off12 &kbfun_layer_pop_1_and_turn_off_led_1_and_2
+
 // ----------------------------------------------------------------------------
 // ----------------------------------------------------------------------------
 
@@ -177,7 +199,7 @@ NULL,
          kprrel, kprrel, kprrel, kprrel, kprrel, kprrel, kprrel,
                  kprrel, kprrel, kprrel, kprrel, kprrel, kprrel,
          kprrel, kprrel, kprrel, kprrel, kprrel, kprrel, kprrel,
-                         kprrel, kprrel, kprrel, kprrel, lpush1,
+                         kprrel, kprrel, kprrel, kprrel, push1led1,
  kprrel, kprrel,
  kprrel,   NULL,   NULL,
  kprrel, kprrel, kprrel ),
@@ -200,7 +222,7 @@ NULL,
         kprrel, kprrel, kprrel, kprrel, kprrel, kprrel, kprrel,
                 kprrel, kprrel, kprrel, kprrel, kprrel, kprrel,
         kprrel, kprrel, kprrel, kprrel, kprrel, kprrel, kprrel,
-                        kprrel, kprrel, kprrel, kprrel, lpush1,
+                        kprrel, kprrel, kprrel, kprrel, push1move12,
  kprrel, kprrel,
  kprrel,   NULL,   NULL,
  kprrel, kprrel, kprrel ),
@@ -222,7 +244,7 @@ NULL,
         kprrel, kprrel, kprrel, kprrel, kprrel, kprrel, kprrel,
                 kprrel, kprrel, kprrel, kprrel, kprrel, kprrel,
         kprrel, kprrel, kprrel, kprrel, kprrel, kprrel, kprrel,
-                        kprrel, kprrel, kprrel, kprrel,  lpop1,
+                        kprrel, kprrel, kprrel, kprrel, pop1off12,
  kprrel, kprrel,
  kprrel,   NULL,  NULL,
  kprrel, kprrel, kprrel ),
